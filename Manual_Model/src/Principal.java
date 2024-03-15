@@ -9,7 +9,56 @@ public class Principal {
 	public static SerialPort serialPort = new SerialPort(PUERTO_SERIAL);
 
 	public static void main(String[] args) {
+		
+		while(true) {
+			
+			System.out.println("--- nemesis ---");
+			System.out.println("1 --> Control manual");
+			System.out.println("2 --> Salir");
+			int opcion = pedirInt("Seleccione una opcion valida");
+			
+			if(opcion==1) {
+				
+				controlManual();
+				
+			}else if(opcion==2) {
+				
+				System.out.println("Saliendo del programa...");
+				break;
+				
+			}else {
+				
+				System.out.println("Seleccione una opcion valida del menu");
 
+			}
+			
+		}
+
+	}
+	
+	public static int pedirInt(String texto) {
+		
+		System.out.print(texto);
+		
+		do {
+			
+			try {
+				
+				int num = Integer.parseInt(teclado.nextLine().trim());
+				return num;
+				
+			} catch (Exception e) {
+				
+				System.out.print("ERROR, inserte un numero entero: ");
+				
+			}
+			
+		}while(true);
+		
+	}
+	
+	public static void controlManual() {
+		
 		try {
 
 			serialPort.openPort();
@@ -51,7 +100,7 @@ public class Principal {
 			ex.printStackTrace();
 
 		}
-
+		
 	}
 
 }
