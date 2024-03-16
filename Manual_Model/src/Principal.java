@@ -1,12 +1,13 @@
 import java.util.Scanner;
 import jssc.SerialPort;
 import jssc.SerialPortException;
+import jssc.*;
 
 public class Principal {
 
 	public static Scanner teclado = new Scanner(System.in);
-	private static final String PUERTO_SERIAL = "COM3"; // Cambiar según el puerto correcto en el sistema
-	public static SerialPort serialPort = new SerialPort(PUERTO_SERIAL);
+	private static final String PUERTO_SERIAL = "COM3"; 
+	//public static SerialPort serialPort = new SerialPort(PUERTO_SERIAL);
 
 	public static void main(String[] args) {
 		
@@ -60,10 +61,9 @@ public class Principal {
 	public static void controlManual() {
 		
 		try {
-
+			SerialPort serialPort = new SerialPort(PUERTO_SERIAL);
 			serialPort.openPort();
-			serialPort.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
-					SerialPort.PARITY_NONE);
+			serialPort.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,SerialPort.PARITY_NONE);
 
 			while (true) {
 
