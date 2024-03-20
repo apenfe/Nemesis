@@ -18,6 +18,7 @@ void setup() {
   servoTilt.write(posTilt);
   
   Serial.begin(9600);
+  
 }
 
 void loop() {
