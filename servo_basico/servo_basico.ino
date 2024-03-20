@@ -3,13 +3,16 @@
 Servo servoPan;
 Servo servoTilt;
 
-const int pinServoPan = 6; 
-const int pinServoTilt = 5;
+const int pinServoPan = 10; 
+const int pinServoTilt = 11;
+const int laser = 13; 
 
 int posPan = 90; // Posición inicial del servo Pan
 int posTilt = 90; // Posición inicial del servo Tilt
 
 void setup() {
+
+  pinMode(laser,OUTPUT);
 
   servoPan.attach(pinServoPan);
   servoTilt.attach(pinServoTilt);
@@ -23,37 +26,50 @@ void setup() {
 
 void loop() {
 
+  digitalWrite(laser,LOW);
+
   if (Serial.available() > 0) {
     
-    char input = Serial.read();
+    byte input = Serial.read();
     
     switch (input) {
-      case 'w':
+
+      case 1:
         if (posTilt > 0) {
-          posTilt -= 2;
+          posTilt -= 1;
           servoTilt.write(posTilt);
         }
         break;
         
-      case 's':
+      case 2:
         if (posTilt < 180) {
-          posTilt += 2;
+          posTilt += 1;
           servoTilt.write(posTilt);
         }
         break;
         
-      case 'a':
+      case 4:
         if (posPan > 0) {
-          posPan -= 2;
+          posPan -= 1;
           servoPan.write(posPan);
         }
         break;
         
-      case 'd':
+      case 3 :
         if (posPan < 180) {
-          posPan += 2;
+          posPan += 1;
           servoPan.write(posPan);
         }
+        break;
+
+        case 5:
+        servoPan.write(posPan);
+        servoTilt.write(posTilt);
+        break;
+
+        case 6:
+        digitalWrite(laser,HIGH);
+        delay(5);
         break;
     }
   }
